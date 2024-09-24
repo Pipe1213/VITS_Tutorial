@@ -96,15 +96,15 @@ To utilize the VITS configuration, the dataset must be formatted in a specific w
 Transcripts should be organized into three text files (`train`, `test`, `validation`), each in TXT format. Each line in these files should start with the audio file path, followed by the speaker ID (for multi-speaker configuration), and the corresponding transcription.
 
 #### For Single-Speaker:
-
+`
 DUMMY/path_to_your_audio_folder/audio_001.wav|transcription_audio_001 
 DUMMY/path_to_your_audio_folder/audio_999.wav|transcription_audio_999
-
+`
 #### For Multi-Speaker:
-
+`
 DUMMY/path_to_your_audio_folder/audio_001.wav|speaker_id|transcription_audio_001 
 DUMMY/path_to_your_audio_folder/audio_999.wav|speaker_id|transcription_audio_999
-
+`
 
 Examples of how the alignment file should look can be found in the `filelists` folder of this repository.
 
