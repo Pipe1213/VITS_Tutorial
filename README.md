@@ -85,8 +85,6 @@ Use the `inference.ipynb` file from the original repository, or the [multi-speak
 - The folder where the generated audio files will be stored
 - The path to the trained model (after training, this is stored in the `logs` folder)
 
-[a relative link](inference_example_ms.py)
-
 ## Dataset Formatting
 
 To utilize the VITS configuration, the dataset must be formatted in a specific way. The audio files should have a sampling frequency of 22 kHz and be in WAV mono format. Additionally, audio files need to be segmented by phrases for two main reasons: longer audio files can reduce alignment quality, and the model automatically excludes files that are too long. To accommodate longer files, you can modify `train.py` at line 70 to increase the threshold for what constitutes a "long" file.
