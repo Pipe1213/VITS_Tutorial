@@ -76,6 +76,14 @@ python train.py -c configs/ljs_base.json -m ljs_base
 # VCTK (multi-speaker)
 python train_ms.py -c configs/vctk_base.json -m vctk_base
 ```
+### 8. Inference
+
+Use the `inference.ipynb` file from the original repository, or the `inference_example_ms.py` file provided, to test inference. To do this, you need to specify the following in the file:
+
+- The model path
+- The configuration file path
+- The folder where the generated audio files will be stored
+- The path to the trained model (after training, this is stored in the `logs` folder)
 
 ## Dataset Formatting
 
