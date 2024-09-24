@@ -23,9 +23,13 @@ python setup.py build_ext --inplace
 ```
 
 ## 4. Preprocess Dataset
-Download datasets
-    1. Download and extract the LJ Speech dataset, then rename or create a link to the dataset folder: `ln -s /path/to/LJSpeech-1.1/wavs DUMMY1`
-    1. For mult-speaker setting, download and extract the VCTK dataset, and downsample wav files to 22050 Hz. Then rename or create a link to the dataset folder: `ln -s /path/to/VCTK-Corpus/downsampled_wavs DUMMY2`
+Download datasets:
+
+1. Download and extract the LJ Speech dataset, then rename or create a link to the dataset folder: 
+    `ln -s /path/to/LJSpeech-1.1/wavs DUMMY1`
+   
+2. For mult-speaker setting, download and extract the VCTK dataset, and downsample wav files to 22050 Hz. Then rename or create a link to the dataset folder: 
+    `ln -s /path/to/VCTK-Corpus/downsampled_wavs DUMMY2`
     
 You can use your own dataset but it must have the same format as the previous ones mentioned (below I will indicate in more detail how to prepare the dataset as well as provide some tools).
 
