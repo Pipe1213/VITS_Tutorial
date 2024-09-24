@@ -58,5 +58,27 @@ python train_ms.py -c configs/vctk_base.json -m vctk_base
 
 # Dataset Formatting
 
+To utilize the VITS configuration, the dataset must be formatted in a specific way. The audio files should have a sampling frequency of 22 kHz and be in WAV mono format. Additionally, audio files need to be segmented by phrases for two main reasons: longer audio files can reduce alignment quality, and the model automatically excludes files that are too long. To accommodate longer files, you can modify `train.py` at line 70 to increase the threshold for what constitutes a "long" file.
+
+## Transcripts Formatting
+
+Transcripts should be organized into three text files (`train`, `test`, `validation`), each in TXT format. Each line in these files should start with the audio file path, followed by the speaker ID (for multi-speaker configuration), and the corresponding transcription.
+
+### For Single-Speaker:
+
+DUMMY/path_to_your_audio_folder/audio_001.wav|transcription_audio_001 
+DUMMY/path_to_your_audio_folder/audio_999.wav|transcription_audio_999
+
+### For Multi-Speaker:
+
+DUMMY/path_to_your_audio_folder/audio_001.wav|speaker_id|transcription_audio_001 
+DUMMY/path_to_your_audio_folder/audio_999.wav|speaker_id|transcription_audio_999
 
 
+Examples of how the alignment file should look can be found in the `filelists` folder of this repository.
+
+### Remarks:
+
+- Each audio file must correspond to a transcription, so ensure you split the audio correctly beforehand.
+- All audio files should have a sample rate of **22050 Hz** for optimal results. If any audio is in stereo, the system will not work, so you must convert them to mono.
+- Speaker IDs start from 0, so keep this in mind when assigning the IDs.
