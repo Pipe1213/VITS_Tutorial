@@ -1,17 +1,19 @@
 # VITS: Conditional Variational Autoencoder with Adversarial Learning for End-to-End Text-to-Speech
 
-## 1. Clone repository and dependencies
+## Training from Scratch
+
+### 1. Clone repository and dependencies
 Clone this repository onto your system:
 
 ``git clone https://github.com/Pipe1213/VITS_Tutorial.git``
 
-## 2. Enviroment setup
+### 2. Enviroment setup
 
 Create a new environment with Python version 3.6, then install all dependencies from the `requirements.txt` file. Note that some dependencies are available via `conda install`, while others can only be installed using `pip`. Therefore, I recommend installing them one by one.
 
 Additionally, it is advised to install the appropriate CUDA driver for your system. You can find the suitable driver at the following link: https://pytorch.org/get-started/locally/
 
-## 3. Monotonic Alignment Search
+### 3. Monotonic Alignment Search
 Build Monotonic Alignment Search module:
 
 ```sh
@@ -22,7 +24,7 @@ python setup.py build_ext --inplace
 
 ```
 
-## 4. Preprocess Dataset
+### 4. Preprocess Dataset
 Download datasets:
 
 1. Download and extract the LJ Speech dataset, then rename or create a symbolic link to the dataset folder: 
@@ -44,8 +46,27 @@ python preprocess.py --text_index 1 --filelists filelists/ljs_audio_text_train_f
 # VCTK
 python preprocess.py --text_index 2 --filelists filelists/vctk_audio_sid_text_train_filelist.txt filelists/vctk_audio_sid_text_val_filelist.txt filelists/vctk_audio_sid_text_test_filelist.txt
 ```
+### 5. Symbols and Clearner files
 
-## 5. Training
+In the `text` folder, there are two important files: `symbols.py` and `cleaners.py`.
+
+- **`symbols.py`** contains all the alphabet characters, numbers, and symbols used in the dataset. Ensure that all characters present in your dataset are included in this file to avoid errors. Additionally, include any potential characters you plan to use during inference, as this cannot be changed after training. Failing to do so will require you to preprocess the input text before inference.
+
+- **`cleaners.py`** provides default text preprocessing routines that are applied to the training, validation, and test data before training, as well as during inference. Modify these routines according to your specific requirements.
+
+### 6. Configuration file
+
+In the `configs` folder, there are example configuration files. Review them and modify anything necessary to adapt to your training setup.
+
+Some of the most important parameters you should change include:
+
+- **Training and validation file paths**
+- **Text cleaners**
+- **Number of speakers** (speaker IDs start counting from zero, but the number of speakers is counted normally. For example, with 2 speakers, the IDs are 0 and 1, and the number of speakers is 2)
+- **Number of epochs**
+- **Batch size** (adjust this according to your hardware)
+
+### 7. Training
 Run the following command depending on the type of training to be performed:
 
 ```sh
@@ -56,20 +77,20 @@ python train.py -c configs/ljs_base.json -m ljs_base
 python train_ms.py -c configs/vctk_base.json -m vctk_base
 ```
 
-# Dataset Formatting
+## Dataset Formatting
 
 To utilize the VITS configuration, the dataset must be formatted in a specific way. The audio files should have a sampling frequency of 22 kHz and be in WAV mono format. Additionally, audio files need to be segmented by phrases for two main reasons: longer audio files can reduce alignment quality, and the model automatically excludes files that are too long. To accommodate longer files, you can modify `train.py` at line 70 to increase the threshold for what constitutes a "long" file.
 
-## Transcripts Formatting
+### Transcripts Formatting
 
 Transcripts should be organized into three text files (`train`, `test`, `validation`), each in TXT format. Each line in these files should start with the audio file path, followed by the speaker ID (for multi-speaker configuration), and the corresponding transcription.
 
-### For Single-Speaker:
+#### For Single-Speaker:
 
 DUMMY/path_to_your_audio_folder/audio_001.wav|transcription_audio_001 
 DUMMY/path_to_your_audio_folder/audio_999.wav|transcription_audio_999
 
-### For Multi-Speaker:
+#### For Multi-Speaker:
 
 DUMMY/path_to_your_audio_folder/audio_001.wav|speaker_id|transcription_audio_001 
 DUMMY/path_to_your_audio_folder/audio_999.wav|speaker_id|transcription_audio_999
@@ -77,7 +98,7 @@ DUMMY/path_to_your_audio_folder/audio_999.wav|speaker_id|transcription_audio_999
 
 Examples of how the alignment file should look can be found in the `filelists` folder of this repository.
 
-### Remarks:
+#### Remarks:
 
 - Each audio file must correspond to a transcription, so ensure you split the audio correctly beforehand.
 - All audio files should have a sample rate of **22050 Hz** for optimal results. If any audio is in stereo, the system will not work, so you must convert them to mono.
