@@ -21,7 +21,8 @@ def get_text(text, hps):
 PATH = Path("~/Documents/LISN/DATA/TTS/VITS").expanduser()
 CONFIG = Path("configs/vctk_base.json")
 
-MODEL = PATH / "wa_graphemes_v3/G_394000.pth"
+# MODEL = PATH / "wa_graphemes_v3/G_394000.pth"  # Problem with short sentences
+MODEL = PATH / "wa_ft_v3/G_213000.pth"
 # OUTPUT = PATH / "gen_audios/wallon_mspho_110624/male_fab_54k/transinne1.wav"
 OUTPUT = PATH / "gen_audios/test1.wav"
 
