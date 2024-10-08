@@ -33,7 +33,7 @@ torch.backends.cudnn.benchmark = True
 global_step = 0
 
 
-def main(args):
+def main():
     """Assume Single Node Multi GPUs Training Only"""
     assert torch.cuda.is_available(), "CPU training is not allowed."
 
@@ -423,14 +423,5 @@ def evaluate(hps, generator, eval_loader, writer_eval):
     generator.train()
 
 
-def arg_parser():
-    parser = argparse.ArgumentParser(description="Train MelGAN")
-    parser.add_argument(
-        "--config", type=str, required=True, help="Path to the config file"
-    )
-    return parser.parse_args()
-
-
 if __name__ == "__main__":
-    args = arg_parser()
-    main(args)
+    main()
