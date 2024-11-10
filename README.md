@@ -1,5 +1,25 @@
 # VITS: Conditional Variational Autoencoder with Adversarial Learning for End-to-End Text-to-Speech
 
+This project provides a step-by-step guide on training VITS, a state-of-the-art model designed for high-quality speech synthesis. The goal of this project is to help others use VITS on their custom datasets and generate high-quality TTS outputs from scratch.
+
+### Project Overview
+- **Goal**: Train a VITS model from scratch using custom datasets, focusing on high-quality TTS generation.
+- **Key Techniques**: Variational autoencoding, adversarial learning, and TTS.
+- **Tools & Libraries**: Python, PyTorch, Jupyter, Hugging Face Transformers.
+
+### Key Features
+- **Dataset Setup**: Instructions on dataset preparation and preprocessing for VITS.
+- **Model Training**: End-to-end steps on configuring and training the model.
+- **Inference**: Guide to generating TTS outputs from text input using the trained model.
+
+## Results
+- Due to an upcoming publication, specific results are not yet publicly available.
+- **Model Access**: You can try the trained models on my [Hugging Face](https://huggingface.co/Pipe1213).
+
+### Usage
+- Follow the tutorial below.
+
+
 ## Training from Scratch
 
 ### 1. Clone repository and dependencies
@@ -111,3 +131,6 @@ Examples of how the alignment file should look can be found in the `filelists` f
 - Each audio file must correspond to a transcription, so ensure you split the audio correctly beforehand.
 - All audio files should have a sample rate of **22050 Hz** for optimal results. If any audio is in stereo, the system will not work, so you must convert them to mono.
 - Speaker IDs start from 0, so keep this in mind when assigning the IDs.
+
+## Contributing
+Contributions are welcome. Please open an issue to discuss your ideas.
